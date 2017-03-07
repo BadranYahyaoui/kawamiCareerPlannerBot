@@ -1,0 +1,13 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+logs/*
+!.gitkeep
+
+node_modules/
+platforms/
+plugins/
+bower_components/
+.idea
+.DS_Store
+lib/
+!lib/push-script
