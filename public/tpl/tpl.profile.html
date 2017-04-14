@@ -1,0 +1,13 @@
+
+<div ng-controller="ngTableController">
+
+<table ng-table="vm.tableParams" class="table" show-filter="true">
+    <tr ng-repeat="user in $data">
+        <td title="'email'" filter="{ email: 'text'}" sortable="'email'">
+            {{user.email}}</td>
+        <td title="'id'" filter="{ id: 'number'}" sortable="'id'">
+            {{user.id}}</td>
+    </tr>
+</table>
+
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
+        <script src="bower_components/angular-resource/angular-resource.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+        <script src="js/main.js" charset="utf-8"></script>
+        <script src="js/users.factory.js" charset="utf-8"></script>
+        <script src="js/routing.js" charset="utf-8"></script>
+        <script src="js/controllers.js" charset="utf-8"></script>
+<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+    </head>
+    <body ng-app="App" class="container" style="background-image:url('test.jpg');background-repeat:no-repeat; background-size: 100% 100%;">
+      <div class="jumbotron-fluid" style="color:white">
+       <h2><b>Administration panel</b></h2>
+       <h3>Monitoring , statistics and actions</h3><br>
+      </div>
+      <div class="col-md-2">
+        <div class="list-group">
+          <a  class="list-group-item active " href="#!/dashboard" >Dashboard</a>
+          <a   class="list-group-item"  href="#!/users/list" >Users managment</a>
+          <a  class="list-group-item"  href="#!/logout" >Logout</a>
+          <a  class="list-group-item"  href="#!/users/profile" >profile tables</a>
+        </div>
+      </div>
+    <div class="col-md-10" ng-view="">
+
+    </div></body>
+</html>
