@@ -11,7 +11,10 @@
  ╭━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━╮
  ╰━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━╯
 
-
+ // =========================================================================
+ // THis was Etablished on the First And Second phase of the PI=========
+ //After in the third Part of the Pi
+ // =========================================================================
  */
 var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -38,8 +41,6 @@ module.exports = function(passport) {
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -54,7 +55,7 @@ module.exports = function(passport) {
     });
 
     // =========================================================================
-    // LOCAL LOGIN =============================================================
+    // LOCAL LOGIN ==============================================
     // =========================================================================
     passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
@@ -92,10 +93,9 @@ module.exports = function(passport) {
     // LOCAL SIGNUP ============================================================
     // =========================================================================
     passport.use('local-signup', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        passReqToCallback : true // yverifi logged in or not :D :D )
     },
     function(req, email, password, done) {
         if (email)
@@ -114,7 +114,6 @@ module.exports = function(passport) {
 
 
 
-                    // check to see if theres already a user with that email
                     if (user) {
                         return done("mail taken");
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
@@ -136,7 +135,6 @@ module.exports = function(passport) {
                     }
 
                 });
-            // if the user is logged in but has no local account...
             } else if ( !req.user.local.email ) {
                 // ...presumably they're trying to connect a local account
                 // BUT let's check if the email used to connect a local account is being used by another user
@@ -160,7 +158,6 @@ module.exports = function(passport) {
                     }
                 });
             } else {
-                // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
                 return done(null, req.user);
             }
 
@@ -169,7 +166,7 @@ module.exports = function(passport) {
     }));
 
     // =========================================================================
-    // FACEBOOK ================================================================
+    // FACEBOOK Mta3 widhni==========
     // =========================================================================
     var fbStrategy = configAuth.facebookAuth;
     fbStrategy.passReqToCallback = true;  // allows us to pass in the req from our route (lets us check if a user is logged in or not)
@@ -302,7 +299,7 @@ module.exports = function(passport) {
     }));
 
     // =========================================================================
-    // TWITTER =================================================================
+    // TWITTER YA behi ==============================================
     // =========================================================================
     passport.use(new TwitterStrategy({
 
@@ -314,10 +311,9 @@ module.exports = function(passport) {
     },
     function(req, token, tokenSecret, profile, done) {
 
-        // asynchronous
         process.nextTick(function() {
 
-            // check if the user is already logged in
+                //
             if (!req.user) {
 
                 User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
@@ -359,7 +355,6 @@ module.exports = function(passport) {
                 });
 
             } else {
-                // user already exists and is logged in, we have to link accounts
                 var user                 = req.user; // pull the user out of the session
                 console.log('its working here ');
                 user.twitter.id          = profile.id;
@@ -390,7 +385,7 @@ module.exports = function(passport) {
     }));
 
     // =========================================================================
-    // GOOGLE ==================================================================
+    // GOOGLE Mayosla7 il chay , Noooob    ======================================
     // =========================================================================
     passport.use(new GoogleStrategy({
 
