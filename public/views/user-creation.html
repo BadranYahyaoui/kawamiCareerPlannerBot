@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html ng-app="bot">
+<head>
+
+</head>
+  <body>
+
+   <div class="container">
+    <h1>Title Detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputTitle">user Email:</label>
+            <div class="controls">
+                <input type="text" id="inputEmail" ng-model="user.email"/>
+                <input type="text" id="inputPass" ng-model="user.password"/>
+
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls" style="margin-top:10px;">
+              <!-- user-detail.html: -->
+                <a ng-click="cancel()" class="btn btn-small btn-primary">Cancel</a>
+                <a ng-click="createNewUser()" class="btn btn-small btn-primary">Add User</a>
+
+              
+            </div>
+        </div>
+    </form>
+</div>
+    </body>
