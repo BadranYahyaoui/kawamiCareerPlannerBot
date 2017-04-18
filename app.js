@@ -1,3 +1,5 @@
+// Dear Grpoup Members do change the order of require plz plz plz
+
 var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -27,7 +29,7 @@ app.use(morgan('dev'));
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 
-app.use( bodyParser.urlencoded({ extended: true }) );
+app.use( bodyParser.urlencoded({ extended: true }) );  //Dear Group member Do not touch this ,Contact Badran t Edit
 app.set('view engine', 'ejs'); // set up ejs for templatingpp.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,7 +39,7 @@ var userlist=require('./routes/userList');
 app.use('/userlist',userlist);
 app.use('/', users);
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'ilovesbadranbadranbadranbadran', // session secret
     resave: true,
     saveUninitialized: true
 }));
