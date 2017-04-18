@@ -16,7 +16,10 @@ var app = express();
 app.use(cors());
 var morgan = require('morgan');
 mongoose.connect(configDB.url);
+var Tag = require('./models/tag');
+
 require('./config/passport')(passport);
+
 
 // view engine setup
 
@@ -28,7 +31,8 @@ app.use( bodyParser.urlencoded({ extended: true }) );
 app.set('view engine', 'ejs'); // set up ejs for templatingpp.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+var tagRouter = require('./routes/tags')(Tag);
+app.use('/api/tags', tagRouter);
 var userlist=require('./routes/userList');
 app.use('/userlist',userlist);
 app.use('/', users);
@@ -50,20 +54,20 @@ app.set('views', path.join(__dirname, 'views'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

@@ -1,6 +1,8 @@
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
+
+    //THE ANGULAR APP WILL BE SECURED IF I ADD THE TOKEN ,AMA MANICH ZEYDOU TAWA :p
     app.get('/connecteduser',isconnected, function(req, res) {
         res.send(req.user);
     });
@@ -26,9 +28,7 @@ module.exports = function(app, passport) {
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
 
-    // locally --------------------------------
-    // LOGIN ===============================
-    // show the login form
+
     app.get('/login', function(req, res) {
         res.render('login.ejs', { message: req.flash('loginMessage') });
     });
@@ -145,11 +145,9 @@ module.exports = function(app, passport) {
         }));
 
 // =============================================================================
-// UNLINK ACCOUNTS =============================================================
+// UNLINK REFRECH =============================================================
 // =============================================================================
-// used to unlink accounts. for social accounts, just remove the token
-// for local account, remove email and password
-// user account will stay active in case they want to reconnect in the future
+
 
     // local -----------------------------------
     app.get('/unlink/local', isLoggedIn, function(req, res) {
