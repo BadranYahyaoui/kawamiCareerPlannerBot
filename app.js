@@ -1,4 +1,4 @@
-// Dear Grpoup Members do change the order of require plz plz plz
+// Dear Grpoup Members do not change the order of require plz plz plz
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -19,7 +19,8 @@ app.use(cors());
 var morgan = require('morgan');
 mongoose.connect(configDB.url);
 var Tag = require('./models/tag');
-
+var seoVerifier=require('./routes/seoVerifier');
+var seoFixer=require('./routes/seoFixer');
 require('./config/passport')(passport);
 
 
@@ -36,10 +37,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var tagRouter = require('./routes/tags')(Tag);
 app.use('/api/tags', tagRouter);
 var userlist=require('./routes/userList');
+app.use('/seostatus',seoVerifier);
+app.use('/seofixer',seoFixer);
 app.use('/userlist',userlist);
 app.use('/', users);
 app.use(session({
-    secret: 'ilovesbadranbadranbadranbadran', // session secret
+    secret: 'ilovebadrane1a378b86bc5c0203239b935e2964ba3', // session secret
     resave: true,
     saveUninitialized: true
 }));
