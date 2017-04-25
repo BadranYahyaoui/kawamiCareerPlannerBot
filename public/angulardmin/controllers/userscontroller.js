@@ -1,7 +1,8 @@
-var app = angular.module('bot.controllers', []);
+var app = angular.module('bot.controllers', ['ngTable']);
 
-app.controller('UsersListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$location',
-    function ($scope, UsersFactory, UserFactory, $location) {
+app.controller('UsersListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$location','NgTableParams','$route',
+    function ($scope, UsersFactory, UserFactory, $location,NgTableParams,$route) {
+
 
         // callback for ng-click 'editUser':
         $scope.editUser = function (userId) {
@@ -12,6 +13,7 @@ app.controller('UsersListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$loca
         $scope.deleteUser = function (userId) {
             UserFactory.delete({ id: userId });
             $scope.users = UsersFactory.query();
+            $route.reload();
         };
 
         // callback for ng-click 'createUser':
@@ -19,11 +21,16 @@ app.controller('UsersListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$loca
             $location.path('/user-creation');
         };
 
-        $scope.users = UsersFactory.query();
+        UsersFactory.query().$promise.then(function (data) {
+            $scope.users = data;
+            $scope.tableParams = new NgTableParams({}, { dataset: $scope.users});
+        });
+
+
     }]);
 
-app.controller('UserDetailCtrl', ['$scope', '$routeParams', 'UserFactory', '$location','UserFactory',
-    function ($scope, $routeParams, UserFactory, $location,UsersFactory) {
+app.controller('UserDetailCtrl', ['$scope', '$routeParams', 'UserFactory', '$location','UserFactory','$rootScope',
+    function ($scope, $routeParams, UserFactory, $location,UsersFactory,$rootScope) {
 
         // callback for ng-click 'updateUser':
         $scope.updateUser = function () {
@@ -40,8 +47,8 @@ app.controller('UserDetailCtrl', ['$scope', '$routeParams', 'UserFactory', '$loc
         $scope.user = UserFactory.show({id: $routeParams.id});
     }]);
 
-app.controller('UserCreationCtrl', ['$scope', 'UsersFactory', '$location',
-    function ($scope, UsersFactory, $location) {
+app.controller('UserCreationCtrl', ['$scope', 'UsersFactory', '$location','$rootScope',
+    function ($scope, UsersFactory, $location,$rootScope) {
 
         // callback for ng-click 'createNewUser':
         $scope.createNewUser = function () {

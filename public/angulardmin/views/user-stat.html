@@ -1,0 +1,35 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="bot">
+<head>
+    <meta charset="UTF-8">
+    <title>Users statistics </title>
+    
+
+</head>
+<body>
+<div class="container" >
+
+
+<h3 class="text-danger">Users stats</h3>
+
+<h5>Users has used Twitter : {{stats.twitter}}</h5>
+<h5>Users has used Facebook : {{stats.facebook}}</h5>
+<h5>Users has used google : {{stats.google}}</h5>
+<h5>Users has on loged in  : {{stats.unverified}}</h5>
+<h5>Tatal numbers of users : {{stats.total}}</h5>
+
+
+    <fusioncharts
+            width="600"
+            height="400"
+            type="pie3d"
+            datasource="{{mDataSource}}"
+    ></fusioncharts>
+
+</div>
+
+
+</body>
+
+
+</html>

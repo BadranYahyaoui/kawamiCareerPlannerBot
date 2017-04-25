@@ -6,22 +6,27 @@
   <body>
 
    <div class="container">
-    <h1>Title Detail</h1>
+    <h1>Add a  User</h1>
+       <h5>Adding user feature allows you to add users us much as u like for test purpose</h5>
 
     <form novalidate="novalidate" class="form-horizontal">
         <div class="control-group">
-            <label class="control-label" for="inputTitle">user Email:</label>
+            <label class="control-label" for="inputEmail">user Email:</label>
             <div class="controls">
                 <input type="text" id="inputEmail" ng-model="user.email"/>
-                <input type="text" id="inputPass" ng-model="user.password"/>
 
+
+            </div>
+            <div class="controls">
+            <label class="control-label" for="inputPass">user Password:</label>
+            <input type="text" id="inputPass" ng-model="user.password"/>
             </div>
         </div>
 
         <div class="control-group">
             <div class="controls" style="margin-top:10px;">
               <!-- user-detail.html: -->
-                <a ng-click="cancel()" class="btn btn-small btn-primary">Cancel</a>
+                <a ng-click="cancel()" class="btn btn-small btn-danger">Cancel</a>
                 <a ng-click="createNewUser()" class="btn btn-small btn-primary">Add User</a>
 
               
