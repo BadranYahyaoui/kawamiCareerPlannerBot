@@ -17,6 +17,7 @@ app.use(cors());
 var morgan = require('morgan');
 mongoose.connect(configDB.url);
 var Tag = require('./models/tag');
+var Quiz = require('./models/quiz');
 
 require('./config/passport')(passport);
 
@@ -35,7 +36,9 @@ var seoVerifier=require('./routes/seoVerifier');
 var seoFixer=require('./routes/seoFixer');
 
 var tagRouter = require('./routes/tags')(Tag);
+var quizRouter = require('./routes/quizzes')(Quiz);
 app.use('/api/tags', tagRouter);
+app.use('/api/quizzes', quizRouter);
 var userlist=require('./routes/userList');
 app.use('/userlist',userlist);
 app.use('/', users);
