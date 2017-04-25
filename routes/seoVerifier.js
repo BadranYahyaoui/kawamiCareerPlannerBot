@@ -38,7 +38,7 @@ router.get('/', function(req, res, next) {
 
 
     setTimeout(function(){
-       res.json(results);
+       res.json(results)
         console.log(results);
     }, 800);
 

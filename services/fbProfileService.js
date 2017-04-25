@@ -32,7 +32,17 @@ module.exports.interestSaver=function saver(interests,userId){
             if (!err) {
                 console.log('user Found');
                 user_data.facebook.interests=interests;
-                resolve(user_data);
+                user_data.save(function (err) {
+                    if (!err) {
+                       resolve("user interests updated succesfully updated");
+                    } else {
+
+                        resolve('cannot update user fb interest ');
+                    }
+
+                });
+                resolve('unser interst updated ');
+
             } else {
                 console.log('user NOt found');
                 reject(err)

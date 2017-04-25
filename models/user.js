@@ -1,21 +1,4 @@
 // load the things we need
-
-/*
-
- ╭━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━╮
- ╰━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━╯
- ╭━━╮╭━━━┳━━━┳━━━┳━━━┳━╮╱╭╮
- ┃╭╮┃┃╭━╮┣╮╭╮┃╭━╮┃╭━╮┃┃╰╮┃┃
- ┃╰╯╰┫┃╱┃┃┃┃┃┃╰━╯┃┃╱┃┃╭╮╰╯┃
- ┃╭━╮┃╰━╯┃┃┃┃┃╭╮╭┫╰━╯┃┃╰╮┃┃
- ┃╰━╯┃╭━╮┣╯╰╯┃┃┃╰┫╭━╮┃┃╱┃┃┃
- ╰━━━┻╯╱╰┻━━━┻╯╰━┻╯╱╰┻╯╱╰━╯
- ╭━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━╮
- ╰━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━╯
-
-
- */
-
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
@@ -45,7 +28,8 @@ var userSchema = mongoose.Schema({
         token        : String,
         tokenSecret  :String,
         displayName  : String,
-        username     : String
+        username     : String,
+        interests: [String]
     },
     google           : {
         id           : String,

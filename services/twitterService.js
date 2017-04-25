@@ -142,7 +142,7 @@ module.exports = exports = function(twitter_token_key, twitter_token_secret) {
             });
         }
         twitterUsersInrests().then(function (res) {
-            // console.log(res);
+            // console.log("results are : \n "+JSON.stringify(res));
             resolve(res)
         });
 
