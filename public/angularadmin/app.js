@@ -28,7 +28,8 @@ angular
         $routeProvider.when('/quiz-edit/:id', {templateUrl: 'views/quiz-edit.html', controller: 'QuizzesEditCtrl'});
         $routeProvider.when('/quiz-stats/', {templateUrl: 'views/quiz-stats.html', controller: 'QuizzesStatsCtrl'});
         $routeProvider.when('/quiz-creation', {templateUrl: 'views/quiz-creation.html', controller: 'QuizCreationCtrl'});
-        
+        $routeProvider.when('/university-list', {templateUrl: 'views/university-list.html', controller: 'UniversitiesListCtrl'});
+        $routeProvider.when('/vocational-list', {templateUrl: 'views/vocational-list.html', controller: 'VocationalsListCtrl'});
         $routeProvider.otherwise({redirectTo: '/user-list'});
 
     }])
