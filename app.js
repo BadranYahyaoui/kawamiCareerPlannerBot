@@ -18,7 +18,7 @@ var morgan = require('morgan');
 mongoose.connect(configDB.url);
 var Tag = require('./models/tag');
 var Quiz = require('./models/quiz');
-
+var db = require('./models/university');
 require('./config/passport')(passport);
 
 
@@ -37,15 +37,21 @@ var seoFixer=require('./routes/seoFixer');
 
 var tagRouter = require('./routes/tags')(Tag);
 var quizRouter = require('./routes/quizzes')(Quiz);
+var universities = require('./routes/universities');
+var vocationalTraining=require('./routes/vocationalTraining');
+
 app.use('/api/tags', tagRouter);
 app.use('/api/quizzes', quizRouter);
+app.use('/api/universities', universities);
+app.use('/api/vocationals',vocationalTraining);
+
 var userlist=require('./routes/userList');
 app.use('/userlist',userlist);
 app.use('/', users);
 app.use('/seostatus',seoVerifier);
 app.use('/seofixer',seoFixer);
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'badlkqjshdqjkshgd', // session secret
     resave: true,
     saveUninitialized: true
 }));
