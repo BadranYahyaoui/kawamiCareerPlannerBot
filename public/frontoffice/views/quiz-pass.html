@@ -1,0 +1,87 @@
+<!DOCTYPE>
+<html ng-app="bot">
+<head>
+    <style>
+        .redc{color:red;}
+        .greenc{color:green;}
+    .center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+    </style>
+
+
+
+    <title>Quizzes Management</title>
+</head>
+<body>
+    <div class="center" style="margin-top:50px;" class="container">   
+        <h1>{{quiz.category}} Quiz </h1>
+          
+           <img ng-src="https://image.freepik.com/free-icon/timer_318-61019.jpg" height="15%" width="15%">
+           <br>
+           <span style="margin-bottom:20px; font-size:24px; font-weight:bold;" class="text-primary">This quiz should take less than 5 minutes.<br> Make sure to answer honestly!</span>
+            <div style="margin-top:50px; font-size:20px;">
+            <h2 class="redc">{{warning}}</h2>
+            
+             <div style="padding-bottom:25px;">
+                 <span style="font-weight:bold;">{{quiz.questions[0].content}}</span>
+                 <br>
+                 <label  style="margin-right:2px" class="text-success" for="Q1">Yes</label><input type="radio" name="Q1" ng-value="quiz.questions[0].tags[0]" ng-model="interests[0]" />
+                 <label style="margin-right:2px; margin-left:50px;" class="text-danger" for="Q1">No</label><input type="radio" ng-value="" name="Q1"  />
+                 
+             </div>
+                
+               <div style="padding-bottom:25px;">
+                 <span style="font-weight:bold;">{{quiz.questions[1].content}}</span>
+                 <br>
+                 <label  style="margin-right:2px" class="text-success" for="Q1">Yes</label><input type="radio" name="Q2" ng-value="quiz.questions[1].tags[0]" ng-model="interests[1]" checked />
+                 <label style="margin-right:2px; margin-left:50px;" class="text-danger" for="Q1">No</label><input type="radio" ng-value="" name="Q2" />
+                 
+             </div>
+                
+                <div style="padding-bottom:25px;">
+                 <span style="font-weight:bold;">{{quiz.questions[2].content}}</span>
+                 <br>
+                 <label  style="margin-right:2px" class="text-success" for="Q1">Yes</label><input type="radio" name="Q3" ng-value="quiz.questions[2].tags[0]" ng-model="interests[2]" checked />
+                 <label style="margin-right:2px; margin-left:50px;" class="text-danger" for="Q1">No</label><input type="radio" ng-value="" name="Q3"  />
+                 
+             </div>
+                
+                <div style="padding-bottom:25px;">
+                 <span style="font-weight:bold;">{{quiz.questions[3].content}}</span>
+                 <br>
+                 <label style="margin-right:2px" class="text-success" for="Q1">Yes</label><input type="radio" name="Q4" ng-value="quiz.questions[3].tags[0]" ng-model="interests[3]" checked />
+                 <label style="margin-right:2px; margin-left:50px;" class="text-danger" for="Q1">No</label><input type="radio" ng-value="" name="Q4"  />
+                 
+             </div>
+                
+               <div style="padding-bottom:25px;">
+                 <span style="font-weight:bold;">{{quiz.questions[4].content}}</span>
+                 <br>
+                 <label style="margin-right:2px" class="text-success" for="Q1">Yes</label><input type="radio" name="Q5" ng-value="quiz.questions[4].tags[0]" ng-model="interests[4]" checked />
+                 <label style="margin-right:2px; margin-left:50px;" class="text-danger" for="Q1">No</label><input type="radio" ng-value="" name="Q5"  />
+                 
+             </div>
+                 
+                 {{interests}}
+                 
+                 
+                  
+                  <a ng-click="gotoPath()" class="btn btn-small btn-success">Show me my path</a>
+                  
+                  
+                  
+                  
+              
+               
+   
+                            
+    </div>
+    </div>
+    
+    
+</body>
+
+</html>

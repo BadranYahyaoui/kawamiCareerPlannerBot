@@ -1,0 +1,35 @@
+<!DOCTYPE>
+<html ng-app="bot">
+<head>
+    <style>
+        .redc{color:red;}
+        .greenc{color:green;}
+    .center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+    </style>
+
+
+
+    <title>User Dashboard</title>
+</head>
+<body>
+    <div class="center" style="margin-top:50px;" class="container">   
+        <h1>Welcome to your dashboard, <ng-if {{connecteduser.twitter.displayName}}!=undefined> {{connecteduser.twitter.displayName}}</ng-if> <ng-if {{connecteduser.facebook.name}}!=undefined> {{connecteduser.facebook.name}}</ng-if> </h1>
+          
+           
+                  
+                  
+              
+               
+   
+                            
+    
+    </div>
+    
+    
+</body>
+
+</html>

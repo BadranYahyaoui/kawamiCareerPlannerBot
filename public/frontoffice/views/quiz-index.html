@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html ng-app="bot">
+<head>
+    <style>
+        .redc{color:red;}
+        .greenc{color:green;}
+    
+    </style>
+
+
+
+    <title>Quizzes Management</title>
+</head>
+<body>
+    <div style="margin-top:50px;" class="container">
+        <h2>You're about to start taking your quiz!</h2>
+        <h3>Please select a field you're interested in</h3>   
+         <div ng-repeat="quiz in quizzes | orderBy:'category'  | unique:'category' | filter: find">
+         
+             <a style="margin-top:20px;" ng-click="gotoQuiz(quiz.category)" class="btn btn-small btn-primary">{{quiz.category}}</a>
+         
+        </div>
+            <div style="margin-top:50px">
+               
+                
+                
+            </div>
+                            
+    </div>
+</body>
+
+</html>
