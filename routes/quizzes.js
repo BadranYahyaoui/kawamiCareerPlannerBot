@@ -43,8 +43,20 @@ var routes = function(Quiz){
     
     
     });
-    
-    
+
+    quizRouter.route('/pass/:category')
+        .get(function(req,res){
+
+            Quiz.findOne({category:req.params.category}, function(err,quiz){
+                if(err)
+                    res.status(500).send(err);
+                else
+                    res.json(quiz);
+                console.log(quiz);
+            })
+
+
+        });
 
     quizRouter.use('/:quizId', function(req,res,next){
         Quiz.findById(req.params.quizId, function(err,quiz){
