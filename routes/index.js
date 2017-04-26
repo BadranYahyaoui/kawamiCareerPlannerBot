@@ -15,6 +15,26 @@ module.exports = function(app, passport) {
             user : req.user
         });
     });
+    app.get('/continue', isLoggedIn, function(req, res) {
+        try{
+
+            if ((req.user.interests!=undefined)&&(req.user.interests.length!=0) ){
+                res.redirect('/frontoffice/index.html#!/front-index');
+            }
+            else {
+                if (( (req.user.facebook.interests!=undefined)&&(req.user.facebook.interests.length>0)) ||
+                    ( (req.user.twitter.interests!=undefined)&&(req.user.facebook.twitter.length>0))  )  {
+                    res.redirect('/frontoffice/index.html#!/front-index')
+
+                }
+                else {
+                    res.redirect('/frontoffice/index.html#!/quiz-index')
+                }
+            }
+        }catch(err){
+            res.redirect('/profile');
+        }
+    });
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
