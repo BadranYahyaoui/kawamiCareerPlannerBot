@@ -40,6 +40,15 @@ var quizRouter = require('./routes/quizzes')(Quiz);
 var universities = require('./routes/universities');
 var vocationalTraining=require('./routes/vocationalTraining');
 
+//var connection = require('./db/connection');
+var node = require('./db/node');
+var branch = require('./db/branch');
+var dt = require('./db/dt');
+var ai = require('./routes/ai');
+var Dt = require('./routes/dt');
+//persistance
+//var user = require('./db/user');
+var ann = require('./db/ann');
 app.use('/api/tags', tagRouter);
 app.use('/api/quizzes', quizRouter);
 app.use('/api/universities', universities);
@@ -50,6 +59,8 @@ app.use('/userlist',userlist);
 app.use('/', users);
 app.use('/seostatus',seoVerifier);
 app.use('/seofixer',seoFixer);
+app.use('/dt',Dt);
+app.use('/ann',ai);
 app.use(session({
     secret: 'badlkqjshdqjkshgd', // session secret
     resave: true,

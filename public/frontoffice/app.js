@@ -11,7 +11,7 @@ angular
         $rootScope.currentUser = {
             id:"sasa",
             name:"Badran"
-        }
+        };
 
 
 
