@@ -1,0 +1,81 @@
+/* ----------------------------------- */
+/* -------------- Dock --------------- */
+/* ----------------------------------- */
+
+.dock {
+    background: #2E2E2E;
+    bottom: -1px;
+    box-sizing: border-box;
+    display: block;
+    font-family: 'Ubuntu', sans-serif;
+    height: auto;
+    left: 0;
+    padding: 12px 22px;
+    position: fixed;
+    right: 0;
+    vertical-align: top;
+    width: 100%;
+    z-index: 9999;
+}
+
+.logo-black {background: url('/bin/media/brand/logo_black.png') center center / contain no-repeat;}
+.logo-white {background: url('/bin/media/brand/logo_white.png') center center / contain no-repeat;}
+.logo-short-black {background: url('/bin/media/brand/logo-short_black.png') center center / contain no-repeat;}
+.logo-short-white {background: url('/bin/media/brand/logo-short_white.png') center center / contain no-repeat;}
+.icon {background: url('/bin/media/brand/icon.png') center center / contain no-repeat;}
+
+.left {float: left;}
+.right {float: right;}
+.clear {clear: both;}
+
+
+.btn-dock {
+    color: #FFF;
+    display: table;
+    font-size: 12px;
+    height: auto;
+    padding: 10px 16px;
+    text-decoration: none;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+
+
+#dock-view-btn {
+    background: #4F4F4F;
+}
+#dock-view-btn:hover {
+    background: #404040;
+}
+
+#dock-buy-btn {
+    background: #0A92DE;
+}
+#dock-buy-btn:hover {
+    background: #1075AD;
+}
+
+#dock-logo {
+    display: inline-block;
+    height: 13px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100px;
+}
+
+
+
+
+
+
+
+
+/* ----------------------------------- */
+/* ----------- Responsive ------------ */
+/* ----------------------------------- */
+@media screen and (max-width:550px) {
+    #dock-view-btn {display: none;} /*Hide view btn*/
+    #dock-logo {left: 22px; transform: translateX(0) translateY(-50%)} /*Move logo to left*/
+}

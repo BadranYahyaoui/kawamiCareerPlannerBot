@@ -1,0 +1,73 @@
+<!DOCTYPE>
+<html ng-app="bot">
+<head>
+
+</head>
+  <body>
+
+   <div class="container">
+    <h1>Quiz Edit Form</h1>
+    
+    
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputTitle"><h2>Please create your new quiz</h2></label>
+            <div class="controls">
+                <h3>Title: <input type="text" rows="2" id="inputTitle" class="form-control" ng-model="quiz.title"/></h3>
+                <h3>Category: <input type="text" class="form-control" id="inputCategory" ng-model="quiz.category"/></h3>
+                <h3>Description: <input type="text" class="form-control" id="inputTitle" ng-model="quiz.description"/></h3>
+                <h3>Selected Times: <input type="text" class="form-control" id="inputTitle" ng-model="quiz.selectedTimes"/></h3>
+                <h3>Satisfaction Rate: <input type="text" class="form-control" id="inputTitle" ng-model="quiz.satisfactionRate"/></h3>
+                <br>
+                <h3>Question 1: <input size="40" type="text"  class="form-control" ng-model="quiz.questions.content" /></h3>
+                <h3>Question 1 - tags (choose 2):</h3>
+                <select class="form-control" ng-model="quiz.questions.tags[0]" ng-options="tag.title for tag in tags">    
+                </select>
+                <select class="form-control" ng-model="quiz.questions.tags[1]" ng-options="tag.title for tag in tags">
+                </select>
+                <br>
+                <h3>Question 2: <input size="40" type="text" class="form-control" ng-model="quiz.questions[1].content" /></h3>
+                <h3>Question 2 - tags (choose 2):</h3>
+                <select class="form-control" ng-model="quiz.questions[1].tags[0]" ng-options="tag.title for tag in tags">    
+                </select>
+                <select class="form-control" ng-model="quiz.questions[1].tags[1]" ng-options="tag.title for tag in tags">    
+                </select>
+                <br>
+                <h3>Question 3: <input size="40" type="text" class="form-control" ng-model="quiz.questions[2].content"/></h3>
+                <h3>Question 3 - tags (choose 2):</h3>
+                <select class="form-control" ng-model="quiz.questions[2].tags[0]" ng-options="tag.title for tag in tags">    
+                </select>
+                <select class="form-control" ng-model="quiz.questions[2].tags[1]" ng-options="tag.title for tag in tags">    
+                </select>
+                <br>
+                <h3>Question 4: <input size="40" type="text" class="form-control" ng-model="quiz.questions[3].content" /></h3>
+                <h3>Question 4 - tags (choose 2):</h3>
+                <select class="form-control" ng-model="quiz.questions[3].tags[0]" ng-options="tag.title for tag in tags">    
+                </select>
+                <select class="form-control" ng-model="quiz.questions[3].tags[1]" ng-options="tag.title for tag in tags">    
+                </select>
+                <br>
+                <h3>Question 5: <input size="40" type="text" class="form-control" ng-model="quiz.questions[4].content" /></h3>
+                <h3>Question 5 - tags (choose 2):</h3>
+                <select class="form-control" ng-model="quiz.questions[4].tags[0]" ng-options="tag.title for tag in tags">    
+                </select>
+                <select class="form-control" ng-model="quiz.questions[4].tags[1]" ng-options="tag.title for tag in tags">    
+                </select>
+                <br>
+                
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls" style="margin-top:10px;">
+              <!-- user-detail.html: -->
+                <a ng-click="cancel()" class="btn btn-small btn-primary">Cancel</a>
+                <a ng-click="createNewQuiz()" class="btn btn-small btn-primary">Create Quiz</a>
+
+              
+            </div>
+        </div>
+    </form>
+</div>
+    </body>

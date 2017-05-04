@@ -1,0 +1,37 @@
+<!DOCTYPE>
+<html ng-app="bot">
+<head>
+    <style>
+        .redc{color:red;}
+        .greenc{color:green;}
+    
+    </style>
+
+
+
+    <title>Quizzes Management</title>
+</head>
+<body>
+    <div style="margin-top:50px;" class="container" >   
+        <h2>Welcome to the Quiz Statistics page,<br> where you can see how well your quizzes perform. </h2>
+            <div style="margin-top:50px">
+          
+            
+          <div >
+    <fusioncharts 
+        width= "75%"
+        height= "400"
+        type= "column2d"
+        dataFormat= "json"
+        dataSource= "{{mDataSource}}">
+              </fusioncharts>
+</div>
+    
+        
+
+            </div>
+                            
+    </div>
+</body>
+
+</html>
