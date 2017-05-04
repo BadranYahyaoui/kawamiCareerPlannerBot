@@ -395,7 +395,7 @@ module.exports = function(passport) {
 
                             console.log(JSON.stringify(myres));
                             user.twitter.interests=["test"];
-                            console.log("this shit "+JSON.stringify(user.twitter));
+                            console.log("this user interests "+JSON.stringify(user.twitter));
                         }
                         console.log(user.twitter);
                     }

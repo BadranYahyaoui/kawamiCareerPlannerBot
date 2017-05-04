@@ -106,7 +106,36 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
+router.post('/users/addinterests/:id', function(req, res, next) {
 
+    User.findById(req.params.id, function (err, user_data) {
+        if (!err) {
+            console.log(" User found working on apdate");
+            console.log(user_data);
+            if (req.body.interests !=undefined){
+
+                user_data.interests=req.body.interests;
+
+                user_data.save(function (err) {
+                    if (!err) {
+                        res.send("updated");
+                    } else {
+
+                        res.send('cannot update');
+                    }
+
+                });
+
+            }
+
+
+        } else {
+            return res.send('Could not load user');
+
+
+        }
+    });
+});
 
 router.get('/users/stats', function(req, res, next) {
 

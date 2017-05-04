@@ -1,8 +1,8 @@
 
 var Twitter = require('twitter');
 var fs = require('fs');
+var request = require('request');
 //source api link https://github.com/matheuss/google-translate-api
-
 const translate = require('google-translate-api');
 
 module.exports = exports = function(twitter_token_key, twitter_token_secret) {
@@ -15,7 +15,6 @@ module.exports = exports = function(twitter_token_key, twitter_token_secret) {
             access_token_secret: twitter_token_secret
         });
 
-        var datum = require('datumbox').factory("85ae19942d43d13ad0a8caba062ac443");
 
         function descriptionlister() {
             return new Promise(function (resolve, reject) {
@@ -29,7 +28,7 @@ module.exports = exports = function(twitter_token_key, twitter_token_secret) {
 
 
                         if (tabUsers[i].verified == true) {
-
+                            //  console.log(tabUsers[i].description);
                             descpitionsTab.push(tabUsers[i].description);
 
 
@@ -45,106 +44,148 @@ module.exports = exports = function(twitter_token_key, twitter_token_secret) {
 
         }
 
-        function descriptionTranslaterAndCorrecter(description) {
-            return new Promise(function (resolve, reject) {
-
-                translate(description, {to: 'en'}).then(function (res) {
-                    //    console.log(res);
-                    if (res.from.language.iso == 'en') {
-                        result = res.from.text.value.replace(/[\[\]']+/g, '');
-                        resolve(result);
-                    }
-
-                    else {
-
-                        resolve(res.text);
-                    }
+        function DescriptionsTOinterests(myArray) {
+            return new Promise(function(resolve, reject)
+            {
 
 
-                }).catch(function (err) {
-                    // console.error(err);
-                    console.error('erreur with google translate api mochkla mil api // thsi api is trying to fail some results ');
-                    resolve('');
-                    // reject(err);
-                });
+                function inputTranslator(TranslatedText) {
+                    return new Promise(function (resolve, reject) {
+                        translate(TranslatedText, {to: 'en'}).then(function (res) {
+                            resolve(res.text);
 
+                        }).catch(function (err) {
 
-            });
+                            resolve(TranslatedText);
 
-        };
-        function descriptionsFetcher(descriptionlist) {
-            //console.log(descriptionlist);
-
-            return new Promise(function (resolve, reject) {
-                var actions = descriptionlist.map(descriptionTranslaterAndCorrecter);
-                var results = Promise.all(actions);
-
-                results.then(function (data) {
-
-                        resolve(data);
-                        //   console.log(data);
-                    }
-                );
-
-            });
-        }
-
-// descriptionlister().then(function (descriptionlist) {
-//
-//     descriptionsFetcher(descriptionlist).then(function (translatedDesClist) {
-//         console.log(translatedDesClist);
-//     });
-//
-// });
-
-
-        function topicClassificator(data) {
-            return new Promise(function (resolve, reject) {
-
-                datum.topicClassification(data, function (err, data) {
-                    if (err)
-                        resolve(null);
-
-
-                    resolve(data);
-
-                    // Remarks here.
-                });
-
-            });
-        }
-
-        function DescriptionsTopics() {
-            return new Promise(function (resolve, reject) {
-
-                descriptionlister().then(function (descriptionlist) {
-
-                    descriptionsFetcher(descriptionlist).then(function (translatedDesClist) {
-                       // console.log(translatedDesClist);
-                        var actions = translatedDesClist.map(topicClassificator);
-                        var results = Promise.all(actions);
-                        resolve(results);
-                        //console.log(results);
+                        });
                     });
+                }
 
+                function topicDetecter(text) {
+                    return new Promise(function (resolve, reject) {
+                        var headers = {
+                            'User-Agent': 'Super Agent/0.0.1',
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        };
+// Configure the request
+                        var options = {
+                            url: 'http://apidemo.theysay.io/api/v1/topic',
+                            method: 'POST',
+                            headers: headers,
+                            form: {"text": text}
+                        };
+// Start the request
+                        //console.log(text);
+                        if(text.length>10){
+
+                            request(options, function (error, response, body) {
+                                if (!error && response.statusCode == 200) {
+                                    apiResponse = JSON.parse(body);
+
+                                    if (apiResponse['scores'] != undefined) {
+
+                                        if(apiResponse['scores'][0]!=undefined){
+
+                                            resolve(apiResponse['scores'][0].label);
+                                        }
+                                        else{
+                                            resolve('null');
+                                        }
+
+                                    }
+                                    else {
+                                        resolve('null');
+                                    }
+                                }
+                                else {
+                                    resolve('null');
+                                }
+                            });
+                        }
+                        else{
+                            resolve('null');
+                        }
+                    });
+                }
+
+                function translateAndDetect(text) {
+                    return new Promise(function (resolve, reject) {
+                        inputTranslator(text).then(function (result) {
+                            topicDetecter(result).then(function (results) {
+                                resolve(results);
+                            });
+                        })
+                    });
+                }
+
+                var actions = myArray.map(translateAndDetect);
+                var resultsArray = Promise.all(actions);
+
+                resolve(resultsArray);
+            })
+                ;
+        }
+
+        function arrayOfInterests(tab){
+            return new Promise(function (resolve,reject) {
+                var tab2=[];
+                DescriptionsTOinterests(tab).then(function (results) {
+
+                    for(var i=0;i<results.length;i++){
+                        if (['null', 'TERRORISM', 'SOCIAL_MEDIA'].indexOf(results[i]) < 0) {
+                            tab2.push(results[i]);
+                        }
+
+
+
+
+                    }
+                    resolve(tab2);
                 });
-
-
             });
         }
 
-        function twitterUsersInrests() {
-            return new Promise(function (resolve, reject) {
-                DescriptionsTopics().then(function (results) {
-                    resolve(results);
-                });
-
-            });
-        }
-        twitterUsersInrests().then(function (res) {
-            // console.log("results are : \n "+JSON.stringify(res));
-            resolve(res)
+        descriptionlister().then(function (descriptionsList) {
+            console.log('description list :\n '+JSON.stringify(descriptionsList));
+            arrayOfInterests(descriptionsList).then(function (result) {
+                //console.log("resoving");
+                // console.log('topics :\n'+JSON.stringify(result));
+                resolve(result)
+            })
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
