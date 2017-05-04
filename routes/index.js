@@ -1,3 +1,4 @@
+var interesService=require('../services/interestService');
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
@@ -17,22 +18,32 @@ module.exports = function(app, passport) {
     });
     app.get('/continue', isLoggedIn, function(req, res) {
         try{
+            var iS=interesService.tagsSaver;
+            if (req.user.twitter.interests!=undefined){
 
-            if ((req.user.interests!=undefined)&&(req.user.interests.length!=0) ){
-                res.redirect('/frontoffice/index.html#!/front-index');
-            }
-            else {
-                if (( (req.user.facebook.interests!=undefined)&&(req.user.facebook.interests.length>0)) ||
-                    ( (req.user.twitter.interests!=undefined)&&(req.user.facebook.twitter.length>0))  )  {
-                    res.redirect('/frontoffice/index.html#!/front-index')
+                if (req.user.twitter.interests.length>0){
+                    iS(req.user.twitter.interests);
+                }
 
-                }
-                else {
-                    res.redirect('/frontoffice/index.html#!/quiz-index')
-                }
             }
+            if (req.user.facebook.interests!=undefined){
+
+                if (req.user.facebook.interests.length>0){
+                    iS(req.user.facebook.interests);
+                }
+
+            }
+
+            setTimeout(function(){
+                if ((req.user.interests!=undefined)&&(req.user.interests.length!=0) ){
+                    res.redirect('/frontoffice/index.html#!/front-index');
+                }
+                res.redirect('/frontoffice/index.html#!/quiz-index');
+            }, 1200);
+
+
         }catch(err){
-            res.redirect('/profile');
+            res.redirect('/frontoffice/index.html#!/quiz-index');
         }
     });
 
