@@ -14,6 +14,12 @@ services.factory('UserConnectedFactory', function ($resource) {
     })
 });
 
+services.factory('UserInterestsFactory', function ($resource) {
+    return $resource('https://carrerplanner-bot.herokuapp.com/userlist/users/addinterests/:id', {id:'@_id'}, {
+        update: { method: 'POST' },
+    })
+});
+
 services.factory('UserFactory', function ($resource) {
     return $resource('https://carrerplanner-bot.herokuapp.com/userlist/:id', {id:'@_id'}, {
         show: { method: 'GET' },

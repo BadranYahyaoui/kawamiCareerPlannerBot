@@ -111,6 +111,7 @@ app.controller('QuizCreationCtrl', ['$scope', 'TagsFactory','QuizzesFactory', '$
     function ($scope, TagsFactory, QuizzesFactory, $location) {
         
         $scope.tags = TagsFactory.query();
+        $scope.categories =["Arts","Economics","Film Industry","Engineering","Language Studies","Science",]
 
         $scope.createNewQuiz = function () {
             QuizzesFactory.create($scope.quiz);
