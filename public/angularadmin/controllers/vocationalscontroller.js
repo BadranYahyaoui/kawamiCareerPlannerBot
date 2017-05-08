@@ -1,9 +1,15 @@
-app.controller('VocationalsListCtrl', ['$scope', 'VocationalsFactory',
+
+app.controller('VocationalsListCtrl', ['$scope','VocationalsFactory',
     function ($scope, VocationalsFactory) {
 
-        // UniversitiesFactory.query().$promise.then(function (data) {
-        //     $scope.universities = data;
-        //     console.log(data);
-        // });
-        $scope.vocationals= VocationalsFactory.query();
+         $scope.vocationals=VocationalsFactory.query();
+     $scope.vocational=new VocationalsFactory();
+var selectedIndex=null;
+
+
+   $scope.delete=function(vocational){
+        vocational.$delete(function(){
+        $scope.vocationals.splice(selectedIndex,1);
+        });
+    }
     }]);
