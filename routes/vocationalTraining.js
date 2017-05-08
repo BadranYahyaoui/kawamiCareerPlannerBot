@@ -3,8 +3,10 @@ var Vocational=mongoose.model('vocational');
 
 var express = require('express');
 var router = express.Router();
+const request = require('request');
+var cheerio = require('cheerio');
+var fs = require('fs')
 
-//var universities = require('../data/university');
 
 
 
@@ -18,36 +20,60 @@ router.get('/', function(req, res) {
 Vocational.find(function(err, vocational) {
        console.log(vocational);
  res.json(vocational);
- //res.render('university.twig', {university: university});
-
  
  });
  });
 
-router.get('/:id',function(req,res){
+// router.get('/:id',function(req,res){
 
-var id=req.params.id;
-Vocational.findById(id).exec(function(err,vocational){
-	if(err)
-		res.status(400).send(err);
-	if(!vocational)
-		res.status(404).send();
-	else
-		res.json(vocational);
-});
-
-
-});
+// var id=req.params.id;
+// Vocational.findById(id).exec(function(err,vocational){
+// 	if(err)
+// 		res.status(400).send(err);
+// 	if(!vocational)
+// 		res.status(404).send();
+// 	else
+// 		res.json(vocational);
+// });
 
 
-router.post('/', function (req, res,next) {
- var vocational= new Vocational(req.body)
-   vocational.save(function(err,vocational){
-       console.log(vocational);
-      res.json(vocational);
-          // res.redirect('form');
-   });
-       
+// });
+
+
+router.get('/add', function (req, res) {
+
+       var o = [
+
+	{
+        "url": "http://www.etudionet.com/fr/etude/guide_centres.php"
+    }
+	
+];
+var tav = Object.values(o);
+var vocational=new Vocational();
+for (i = 0; i < tav.length; i++) {
+    console.log(tav[i].url);
+    request(tav[i].url, function(err, res, body) {
+        if (err) console.log('erro: ' + err);
+        var $ = cheerio.load(body);
+        var titles = [];
+		var a=0;
+		$('td tr .linkrub').each(function() {
+			a=a+1;
+			console.log(Number(a));
+       		title = $(this).text().trim();
+            console.log('title :'+title);
+			var titles=new Vocational({
+               "title" : title
+            });
+            titles.save();
+        });	
+		
+		fs.appendFile('data/vocational.json', JSON.stringify(titles));
+//res.send('ok');
+    });
+
+}
 });
 router.delete('/:id', function(req,res) {
 
@@ -59,36 +85,9 @@ Vocational.findByIdAndRemove(id, function(err,vocational){
 		res.send();
 })
 });
-// router.get('/:id', function (req, res, next) {
-//     Universities.findById({ _id: req.params.id }, function (err, doc) {   
-// return res.json(Universities);
-//     })
-// });
 
-// router.post('/edit/:id', function (req, res, next) {
-
-
-//     Vocational.findById({ _id: req.params.id }, function (err, doc) {
-//         if (err)
-//             console.log(err);
-
-//         doc.title = req.body.universit;
-        
-//         doc.save(function (err, todo) {
-//             if (err) {
-//                 res.status(500).send(err)
-//             }
-//            // res.redirect('/universities/list')
-//            res.json(Universities);
-//         });
-
-//     })
-// });
 router.put('/:id' , function (req, res){
-	// Universities[{_id:req.params.id}]= req.body;
-	// Universities.push(function(err,university){
- //       console.log(university);
- //      res.json(university);
+
  var vocational= new Vocational(req.body)
    vocational.save(function(err,vocational){
        console.log(vocational);
