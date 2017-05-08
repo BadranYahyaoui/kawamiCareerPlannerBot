@@ -1,4 +1,5 @@
 
+
 <div class="container">
     <h1 style="font-size:60px;">Vocational List</h1>
 
@@ -7,16 +8,17 @@
         <thead>
         <tr>
             <th style="font-size:12px;">Centers</th>
+            <th style="font-size:12px;">Action</th>
         </tr>
 
         </thead>
 
         <tr ng-repeat="vocational in vocationals " >
             <td >
-                {{vocational.Center}}
+                {{vocational.title}}
             </td>
 
-
+<td><a ng-click="delete(vocational)" class="btn btn-small btn-danger">Remove</a></td>
         </tr>
 
     </table>
